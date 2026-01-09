@@ -17,35 +17,36 @@ const Content = (props) => {
         )}
     </div>
   )
-//   return (
-//     <div>
-//       <p>{props.parts[0].name} {props.parts[0].exercises}</p>
-//       <p>{props.parts[1].name} {props.parts[1].exercises}</p>
-//       <p>{props.parts[2].name} {props.parts[2].exercises}</p>
-//     </div>
-//   )
 }
 
 const Total = (props) => {
-const sum = props.parts.reduce((accumulator, currVal) => {
-    return accumulator + currVal.exercises;
-}, 0)
-// console.log(sum)
-  return (
-    <div>
-      <ul>Number of exercises {sum}</ul>
-    </div>
-  )
-}
-
-const Course = ({ course }) => {
+    const sum = props.parts.reduce((accumulator, currVal) => {
+        return accumulator + currVal.exercises;
+    }, 0)
     return (
         <div>
-        <Header name={course.name} />
-        <Content parts={course.parts} />
-        <Total parts={course.parts} />
+        <ul>Number of exercises {sum}</ul>
         </div>
     )
 }
 
-export default Course
+const Course = ({ name, parts }) => {
+    console.log('inside individual course')
+    return (
+        <div>
+        <Header name={name} />
+        <Content parts={parts} />
+        <Total parts={parts} />
+        </div>
+    )
+}
+const Courses = ({ courses }) => {
+    console.log('inside cumulative courses')
+    return (
+        courses.map(course => (
+            <Course key={course.id} name={course.name} parts={course.parts}></Course>
+        ))
+    )
+}
+
+export default Courses
