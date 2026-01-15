@@ -8,21 +8,20 @@ function App() {
   const [countryList, setCountryList] = useState([])
   const [filteredList, setFilteredList] = useState([])
   
-useEffect(() => {
-  axios
-    .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
-    .then(res => {
-      setCountryList(res.data)
-    })
-}, []) 
+  useEffect(() => {
+    axios
+      .get(`https://studies.cs.helsinki.fi/restcountries/api/all`)
+      .then(res => {
+        setCountryList(res.data)
+      })
+  }, []) 
 
-useEffect(() => {
-  const filtered = countryList.filter(country =>
-    country.name.common.toLowerCase().includes(value.toLowerCase())
-  )
-  setFilteredList(filtered)
-  console.log(filtered)
-}, [value])
+  useEffect(() => {
+    const filtered = countryList.filter(country =>
+      country.name.common.toLowerCase().includes(value.toLowerCase())
+    )
+    setFilteredList(filtered)
+  }, [value])
 
 
   return (
