@@ -13,7 +13,7 @@ const url = `mongodb+srv://kelvincheng2009_db_user:${password}@cluster0.zbmit2i.
 mongoose.set('strictQuery', false)
 
 mongoose.connect(url, { family: 4 }).
-    catch(e => console.log('Failed to connect to server. Invalid password given'))
+    catch(() => console.log('Failed to connect to server. Invalid password given'))
 
 const schema = new mongoose.Schema({
     name: String,
@@ -39,8 +39,8 @@ else {
         number,
         id: Math.floor(Math.random() * 123456789).toString()
     })
-    
-    newPerson.save().then(res => {
+
+    newPerson.save().then(() => {
         console.log(`Added ${name} number ${number} to phonebook`)
         mongoose.connection.close()
     })
