@@ -237,6 +237,43 @@ describe('tests for POST /api/blogs', () => {
     })
 })
 
+describe('tests for DELETE /api/blogs/:id', () => {
+    test('Succeeds with status code 204 with proper id', async() => {
+        const blogs = await helper.getBlogsInDb()
+        const blogToDelete = blogs[0]
+
+        await api
+            .delete(`/api/blogs/${blogToDelete.id}`)
+            .expect(204)
+        
+        const updatedDb = await helper.getBlogsInDb()
+        const ids = updatedDb.map(blog => blog.id)
+        assert(!ids.includes(blogToDelete.id))
+        assert.strictEqual(updatedDb.length, helper.blogs.length - 1)
+    })
+})
+
+describe('tests for PUT /api/blogs/:id', () => {
+    test('Successful update of blog post', async() => {
+        const blogs = await helper.getBlogsInDb()
+        const blogToUpdate = {
+            ...blogs[0],
+            title: 'updated title',
+            likes: '101101'
+        }
+
+        await api
+            .put(`/api/blogs/${blogToUpdate.id}`)
+            .send(blogToUpdate)
+            .expect(200)
+        
+        const updatedDb = await helper.getBlogsInDb()
+        const updatedBlog = updatedDb.find(blog => blog.title === 'updated title')
+        assert.ok(updatedBlog)
+        assert.strictEqual(updatedBlog.likes, 101101)
+    })
+})
+
 after(async() => {
     await mongoose.connection.close()
 })

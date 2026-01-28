@@ -51,12 +51,12 @@ const blogs = [
   }  
 ]
 
-const getNotesInDb = async() => {
+const getBlogsInDb = async() => {
     const blogs = await Blog.find({})
     return blogs.map(blog => blog.toJSON())
 }
 
 module.exports = {
     blogs,
-    getNotesInDb,
+    getBlogsInDb,
 }
