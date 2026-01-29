@@ -1,9 +1,60 @@
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IktlbHZpbiIsImlkIjoiNjk3YWRmOTA4Mzc2ZDMxMmQzMDRhM2IzIiwiaWF0IjoxNzY5NjYxNDM2fQ.WspB-r1MxtQ5M-sXYFX9Oftout3ozGjQUHpVZTO_4vI
 
 {
-    "title": "testing2",
+    "title": "testing3",
     "author": "Kelvin",
     "url": "https://www.google.com/",
-    "likes": 47
+    "likes": 47,
+    "userId": "697adf908376d312d304a3b3"
 }
+
+###
+POST http://localhost:3003/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "username": "Kelvin",
+    "name": "KC",
+    "password": "password123"
+}  
+
+###
+POST http://localhost:3003/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "username": "notKelvin",
+    "name": "NKC",
+    "password": "notpassword123"
+}  
+
+### 
+POST http://localhost:3003/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "Kelvin",
+    "password": "password123"
+}  
+
+### 
+POST http://localhost:3003/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "Kelvin",
+    "password": "wrongpassword456"
+}  
+
+### 
+POST http://localhost:3003/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "notKelvin",
+    "password": "notpassword123"
+}  
+
+//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5vdEtlbHZpbiIsImlkIjoiNjk3YWU5NTY2YzM0NWI3YThkNGI2ZTllIiwiaWF0IjoxNzY5NjYzMDIwfQ.ja6SGcfjfGDMO13u1VfFaeZY8pqcBfXIAk2-NsZnIWw
